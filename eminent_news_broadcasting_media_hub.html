@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMINENT NETWORK BROADCAST — WE ARE YOUR VOICE</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        darkbase: '#ffffff',
+                        cardbase: '#f8fafc',
+                        borderbase: '#e228f0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>/* Forces all card body text and paragraphs to dark black */
+.bg-cardbase h4, .bg-cardbase h3, .bg-cardbase p {
+    color: #111827 !important; /* Tailwind gray-900 */
+}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #162341;
+            color: #000000;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-brand-900 via-rose-900 to-brand-800 text-xs py-2 px-4 text-center font-medium tracking-wide text-rose-100 flex items-center justify-center gap-2 shadow-inner">
+        <span class="bg-brand-500 text-white uppercase text-[10px] px-2 py-0.5 rounded-full font-bold animate-pulse">LIVE FEED</span>
+        <span>ENB Live coverage ongoing across our YouTube Hub and Video vault.</span>
+        <button onclick="switchTab('youtube')" class="underline hover:text-black ml-2 font-semibold">Watch Now &rarr;</button>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-darkbase/90 backdrop-blur-md border-b border-borderbase transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+           <!-- Brand Logo Container -->
+        <div class="flex items-center gap-4 cursor-pointer" onclick="switchTab('home')">
+            
+            <!-- Full Logo Image -->
+            <img src="ENB LOGO.Png" class="h-12 w-auto object-contain">
+                <div>
+                    <h1 class="font-black text-lg tracking-wider text-black uppercase leading-tight">EMINENT NETWORK BROADCAST</h1>
+                    <p class="text-[10px] tracking-widest text-sky-400 font-bold uppercase">WE ARE YOUR VOICE </p>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-1 bg-cardbase/60 p-1.5 rounded-2xl border border-borderbase shadow-sm">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all text-black bg-brand-600 shadow-md">
+                    <i class="fa-solid fa-house mr-2"></i>Home
+                </button>
+                <button onclick="switchTab('videos')" id="nav-videos" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-black hover:text-white hover:bg-gray-800">
+                    <i class="fa-solid fa-video mr-2"></i>Video Vault
+                </button>
+                <button onclick="switchTab('photos')" id="nav-photos" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-black hover:text-white hover:bg-gray-800">
+                    <i class="fa-solid fa-camera mr-2"></i>Photo Gallery
+                </button>
+                <button onclick="switchTab('articles')" id="nav-articles" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-black hover:text-white hover:bg-gray-800">
+                    <i class="fa-solid fa-newspaper mr-2"></i>Articles
+                </button>
+                <button onclick="switchTab('youtube')" id="nav-youtube" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-black hover:text-white hover:bg-gray-800">
+                    <i class="fa-brands fa-youtube mr-2"></i>YouTube Hub
+                </button>
+            </nav>
+
+            <!-- Search & Actions -->
+            <div class="flex items-center gap-3">
+                <div class="relative hidden sm:block">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </span>
+                    <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search news, topics..." class="bg-cardbase border border-borderbase text-sm rounded-xl pl-9 pr-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 w-48 lg:w-64 transition-all">
+                </div>
+                <button onclick="openAddModal()" class="bg-gradient-to-r from-rose-600 to-brand-600 hover:from-rose-500 hover:to-brand-500 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-lg shadow-brand-600/20 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="hidden md:inline">Add Content</span>
+                </button>
+                <!-- Mobile Menu Toggle -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-cardbase border border-borderbase text-gray-300 hover:text-white">
+                    <i class="fa-solid fa-bars text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-borderbase bg-cardbase/95 backdrop-blur-md px-4 py-4 space-y-2">
+            <div class="relative mb-3">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                    <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                </span>
+                <input type="text" oninput="handleSearch(this.value)" placeholder="Search news, topics..." class="w-full bg-darkbase border border-borderbase text-sm rounded-xl pl-9 pr-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-brand-500">
+            </div>
+            <button onclick="switchTab('home'); toggleMobileMenu()" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-white bg-brand-600">
+                <i class="fa-solid fa-house mr-3 w-5"></i>Home
+            </button>
+            <button onclick="switchTab('videos'); toggleMobileMenu()" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-black hover:bg-gray-800">
+                <i class="fa-solid fa-video mr-3 w-5"></i>Video Vault
+            </button>
+            <button onclick="switchTab('photos'); toggleMobileMenu()" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-black hover:bg-gray-800">
+                <i class="fa-solid fa-camera mr-3 w-5"></i>Photo Gallery
+            </button>
+            <button onclick="switchTab('articles'); toggleMobileMenu()" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-black hover:bg-gray-800">
+                <i class="fa-solid fa-newspaper mr-3 w-5"></i>Articles
+            </button>
+            <button onclick="switchTab('youtube'); toggleMobileMenu()" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-black hover:bg-gray-800">
+                <i class="fa-brands fa-youtube mr-3 w-5"></i>YouTube Hub
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Views Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+        <!-- SEARCH RESULTS BANNER (Appears when searching) -->
+        <div id="search-results-container" class="hidden mb-8">
+            <div class="flex items-center justify-between bg-cardbase border border-borderbase p-4 rounded-2xl">
+                <div>
+                    <h2 class="text-xl font-bold text-black flex items-center gap-2">
+                        <i class="fa-solid fa-filter text-brand-500"></i> Search Results for "<span id="search-query-text" class="text-brand-400"></span>"
+                    </h2>
+                    <p class="text-xs text-black mt-1">Showing all matching videos, photos, articles, and YouTube transmissions.</p>
+                </div>
+                <button onclick="clearSearch()" class="text-xs bg-gray-800 hover:bg-gray-700 text-black px-3 py-1.5 rounded-lg transition-all">Clear Search</button>
+            </div>
+            <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+
+        <!-- TAB 1: HOME / LANDING PAGE -->
+        <div id="view-home" class="space-y-12">
+            <!-- Hero Banner / Featured Headline -->
+            <section class="relative rounded-3xl overflow-hidden border border-borderbase bg-gradient-to-br from-cardbase to-darkbase shadow-2xl">
+                <!-- 🔴 FULL-CARD WATERMARK LAYER -->
+                     <div class="absolute inset-0 z-0 pointer-events-none flex items-center justify-center p-4">
+                           <img src="ENB LOGO.Png" 
+                             alt="ENB Watermark Background" 
+                              class="w-full h-full object-contain opacity-10 filter grayscale select-none">
+                             </div>
+                <div class="absolute inset-0 z-0 opacity-40">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbase via-darkbase/70 to-transparent"></div>
+                </div>
+                   <!-- FOREGROUND CONTENT -->
+                       <div class="relative z-10 p-8 sm:p-12 lg:p-16 flex flex-col justify-end min-h-[440px]">
+        
+                    <!-- Badge & Date Bar -->
+                     <div class="flex items-center gap-3 mb-6">
+                     <span class="bg-brand-600 text-white text-xs px-3.5 py-1 rounded-full font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md shadow-brand-600/30">
+                     <i class="fa-solid fa-satellite-dish"></i> WELCOME TO ENB
+                     </span>
+                     <span class="text-gray-500 text-xs font-semibold tracking-wide">Live Updates • 24/7 Coverage</span>
+                    </div>
+
+                      <!-- MAIN TITLE (Short, Punchy, Crisp) -->
+                      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight max-w-3xl mb-4">
+                       Your Front-Row Seat to the Stories That Matter. 📡
+                      </h2>
+
+        <!-- SUB-PARAGRAPH (Lighter Weight, Readable Spacing) -->
+        <p class="text-gray-600 text-base sm:text-lg max-w-2xl leading-relaxed mb-8 font-medium">
+            Stay informed with breaking news, in-depth analysis, and live updates straight from the heart of our community directly to your screen.
+        </p>
+                    <p class="text-black text-sm sm:text-base max-w-2xl line-clamp-2 mb-6 font-normal">
+                          140 nations. 1 massive leap for clean energy. Is this the deal that changes everything for the global energy grid? Read the full special report on ENB!
+                    </p>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <button onclick="openDetailModal('article', 1)" class="bg-brand-600 hover:bg-brand-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-book-open"></i> Read Full Report
+                        </button>
+                        <button onclick="openDetailModal('video', 1)" class="bg-gray-800/90 hover:bg-gray-700 text-white px-6 py-3 rounded-xl font-semibold backdrop-blur-md border border-gray-700 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-play text-brand-500"></i> Watch Special Broadcast
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Category Filter Bar -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-borderbase pb-6">
+                <div>
+                    <h3 class="text-xl font-black text-white uppercase tracking-wider">Eminent Content Stream</h3>
+                    <p class="text-xs text-white">Explore across verified journalism, high-res photo essays, and exclusive media streams.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="filterHomeFeed('all')" id="filter-home-all" class="home-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 text-white transition-all shadow-md">All Streams</button>
+                    <button onclick="filterHomeFeed('videos')" id="filter-home-videos" class="home-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-cardbase text-black hover:text-white border border-borderbase transition-all">Videos</button>
+                    <button onclick="filterHomeFeed('photos')" id="filter-home-photos" class="home-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-cardbase text-black hover:text-white border border-borderbase transition-all">Photos</button>
+                    <button onclick="filterHomeFeed('articles')" id="filter-home-articles" class="home-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-cardbase text-black hover:text-white border border-borderbase transition-all">Articles</button>
+                    <button onclick="filterHomeFeed('youtube')" id="filter-home-youtube" class="home-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-cardbase text-black hover:text-white border border-borderbase transition-all">YouTube</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Grid Feed -->
+            <div id="home-feed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically populated via renderHomeFeed() -->
+            </div>
+        </div>
+
+        <!-- TAB 2: VIDEO VAULT -->
+        <div id="view-videos" class="hidden space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-cardbase to-darkbase p-6 rounded-3xl border border-borderbase">
+                <div>
+                    <span class="text-brand-500 font-bold uppercase text-xs tracking-widest">Vault Library</span>
+                    <h2 class="text-2xl font-black text-black mt-1">Hosted Video Vault</h2>
+                    <p class="text-black text-sm mt-1">Original documentaries, investigative special reports, and expert interviews.</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="filterVideoCategory('all')" id="vcat-all" class="vcat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-black">All Categories</button>
+                    <button onclick="filterVideoCategory('Documentaries')" id="vcat-Documentaries" class="vcat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-cardbase text-black border border-borderbase">Documentaries</button>
+                    <button onclick="filterVideoCategory('Interviews')" id="vcat-Interviews" class="vcat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-cardbase text-black border border-borderbase">Interviews</button>
+                    <button onclick="filterVideoCategory('Specials')" id="vcat-Specials" class="vcat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-cardbase text-black border border-borderbase">Specials</button>
+                </div>
+            </div>
+
+            <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Populated via renderVideos() -->
+            </div>
+        </div>
+
+        <!-- TAB 3: PHOTO GALLERY -->
+        <div id="view-photos" class="hidden space-y-8">
+            <div class="bg-gradient-to-r from-cardbase to-darkbase p-6 rounded-3xl border border-borderbase flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-brand-500 font-bold uppercase text-xs tracking-widest">Visual Journalism</span>
+                    <h2 class="text-2xl font-black text-black mt-1">High-Resolution Photo Gallery</h2>
+                    <p class="text-black text-sm mt-1">Capturing pivotal global moments through cinematic photography with full-resolution lightbox inspection.</p>
+                </div>
+                <div class="text-xs text-black bg-darkbase px-4 py-2 rounded-xl border border-borderbase">
+                    <i class="fa-solid fa-circle-info text-brand-500 mr-2"></i>Click any image for Lightbox mode
+                </div>
+            </div>
+
+            <!-- Masonry Gallery Grid -->
+            <div class="masonry-grid" id="photos-masonry">
+                <!-- Populated via renderPhotos() -->
+            </div>
+        </div>
+
+        <!-- TAB 4: EDITORIAL / ARTICLES -->
+        <div id="view-articles" class="hidden space-y-8">
+            <div class="bg-gradient-to-r from-cardbase to-darkbase p-6 rounded-3xl border border-borderbase flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-brand-500 font-bold uppercase text-xs tracking-widest">Digital Magazine</span>
+                    <h2 class="text-2xl font-black text-black mt-1">Editorial & In-Depth Articles</h2>
+                    <p class="text-black text-sm mt-1">Rigorous journalism, expert analysis, and thorough investigative essays.</p>
+                </div>
+            </div>
+
+            <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Populated via renderArticles() -->
+            </div>
+        </div>
+
+        <!-- TAB 5: YOUTUBE HUB -->
+        <div id="view-youtube" class="hidden space-y-8">
+            <div class="bg-gradient-to-r from-cardbase to-darkbase p-6 rounded-3xl border border-borderbase flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-rose-500 font-bold uppercase text-xs tracking-widest flex items-center gap-1.5">
+                        <i class="fa-brands fa-youtube text-base"></i> Broadcast Feed
+                    </span>
+                    <h2 class="text-2xl font-black text-black mt-1">YouTube Hub & Live Broadcasts</h2>
+                    <p class="text-black text-sm mt-1">Stream curated official YouTube broadcasts, live panels, and video shorts directly from our network.</p>
+                </div>
+                <a href="https://www.youtube.com/@Embuni_newsbroadcast" target="_blank" class="bg-rose-600 hover:bg-rose-500 text-black px-4 py-2.5 rounded-xl text-xs font-semibold shadow-lg shadow-rose-600/30 transition-all flex items-center gap-2 self-start">
+                    <i class="fa-brands fa-youtube text-sm"></i> Visit Official Channel
+                </a>
+            </div>
+
+            <div id="youtube-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- Populated via renderYoutube() -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- UNIVERSAL DETAIL / MODAL VIEW -->
+    <div id="detail-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-cardbase border border-borderbase rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-darkbase/80 hover:bg-rose-600 text-black flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modal-content" class="p-6 sm:p-8">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX PHOTO MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg hidden flex-col items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-black-400 hover:text-black w-12 h-12 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-xl transition-all">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-5xl w-full flex flex-col items-center">
+            <img id="lightbox-img" src="" alt="Lightbox high-res" class="max-h-[75vh] max-w-full rounded-2xl object-contain shadow-2xl border border-gray-800">
+            <div class="mt-4 text-center max-w-2xl">
+                <h3 id="lightbox-title" class="text-xl font-bold text-black"></h3>
+                <p id="lightbox-caption" class="text-sm text-black-400 mt-1"></p>
+                <div class="flex items-center justify-center gap-4 mt-4">
+                    <button onclick="shareCurrentItem()" class="bg-gray-800 hover:bg-gray-700 text-black px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-share-nodes"></i> Share Photo
+                    </button>
+                    <a id="lightbox-download" href="#" target="_blank" download class="bg-brand-600 hover:bg-brand-500 text-black px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> High-Res Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD CONTENT MODAL (Admin / User Simulation) -->
+    <div id="add-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-cardbase border border-borderbase rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-xl font-bold text-black">Publish New Content</h3>
+                    <p class="text-xs text-black-400">Instantly append new items into the Eminent News Vault.</p>
+                </div>
+                <button onclick="closeAddModal()" class="text-black-400 hover:text-black w-8 h-8 rounded-full bg-darkbase flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <form id="add-content-form" onsubmit="handleAddNewContent(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-black-300 uppercase mb-1">Content Type</label>
+                    <select id="new-type" onchange="toggleAddFields()" class="w-full bg-darkbase border border-borderbase rounded-xl px-4 py-2.5 text-sm text-black focus:outline-none focus:border-brand-500">
+                        <option value="video">Hosted Video</option>
+                        <option value="photo">High-Res Photo</option>
+                        <option value="article">Editorial Article</option>
+                        <option value="youtube">YouTube Embed Link</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-black-300 uppercase mb-1">Title</label>
+                    <input type="text" id="new-title" required placeholder="Enter compelling title..." class="w-full bg-darkbase border border-borderbase rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-500 focus:outline-none focus:border-brand-500">
+                </div>
+                <div id="field-url-container">
+                    <label id="url-label" class="block text-xs font-semibold text-black-300 uppercase mb-1">Thumbnail / Media Image URL</label>
+                    <input type="url" id="new-url" required placeholder="https://images.unsplash.com/..." class="w-full bg-darkbase border border-borderbase rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-500 focus:outline-none focus:border-brand-500">
+                </div>
+                <div id="field-extra-container">
+                    <label id="extra-label" class="block text-xs font-semibold text-black-300 uppercase mb-1">Category / Author</label>
+                    <input type="text" id="new-extra" required placeholder="e.g. Documentaries or Dr. Marcus Vance" class="w-full bg-darkbase border border-borderbase rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-500 focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-black-300 uppercase mb-1">Description / Content Summary</label>
+                    <textarea id="new-desc" rows="3" required placeholder="Provide concise synopsis or article text..." class="w-full bg-darkbase border border-borderbase rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-500 focus:outline-none focus:border-brand-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-black font-semibold py-3 rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Publish Content
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-gray-900 border border-brand-500 text-white px-5 py-3 rounded-2xl shadow-2xl transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3">
+        <div class="w-7 h-7 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center">
+            <i class="fa-solid fa-check text-xs"></i>
+        </div>
+        <div>
+            <h4 id="toast-title" class="text-xs font-bold">Success</h4>
+            <p id="toast-msg" class="text-[11px] text-black-400">Content successfully published.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-cardbase border-t border-borderbase mt-20 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white font-black text-lg">
+                    <img src="ENB LOGO.Png" class="h-12 w-auto object-contain">
+                    </div>
+                    <div>
+                        <h2 class="font-black text-sm tracking-wider text-black uppercase leading-tight">EMINENT NETWORK</h2>
+                        <p class="text-[9px] tracking-widest text-rose-500 font-bold uppercase">BROADCAST</p>
+                    </div>
+                </div>
+                <p class="text-xs text-black leading-relaxed">
+                    Eminent Network Broadcasting is an international multi-format news hub delivering rigorous journalism, immersive video vaults, high-resolution visual storytelling, and verified digital transmissions.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-black mb-4">Content Hub</h4>
+                <ul class="space-y-2 text-xs text-black-400">
+                    <li><button onclick="switchTab('videos')" class="hover:text-black transition-all">Video Vault</button></li>
+                    <li><button onclick="switchTab('photos')" class="hover:text-black transition-all">Photo Gallery</button></li>
+                    <li><button onclick="switchTab('articles')" class="hover:text-black transition-all">Editorial Articles</button></li>
+                    <li><button onclick="switchTab('youtube')" class="hover:text-black transition-all">YouTube Broadcasts</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-black mb-4">Country and County Bureaus</h4>
+                <ul class="space-y-2 text-xs text-black-300">
+                    <li>Kenya • Broadcasting House</li>
+                    <li>Nairobi • ENB Media Tower</li>
+                    <li>Embu • Local Affairs HQ</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-black mb-4">Newsletter Dispatch</h4>
+                <p class="text-xs text-black-400 mb-3">Receive elite investigative briefs directly to your secure inbox.</p>
+                <div class="flex gap-2">
+                    <input type="email" placeholder="Enter email..." class="bg-darkbase border border-borderbase rounded-xl px-3 py-2 text-xs text-black placeholder-gray-500 focus:outline-none focus:border-brand-500 w-full">
+                    <button onclick="showToast('Subscribed', 'You have been added to the secure dispatch list.')" class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-borderbase/60 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+            <p>&copy; 2026 EMINENT NETWORK BROADCAST CO. All rights reserved.</p>
+            <div class="flex gap-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:text-black-300">Privacy Policy</a>
+                <a href="#" class="hover:text-black-300">Terms of Broadcast</a>
+                <a href="#" class="hover:text-black-300">Secure Drop</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Application JavaScript -->
+    <script>
+        // --- INITIAL MOCK DATA STORAGE ---
+        let appData = {
+            videos: [
+                {
+                    id: 1,
+                    title: "The Silent Ocean Currents: Deep Dive Expedition",
+                    description: "An investigative documentary examining underwater thermal conveyor disruptions across the South Atlantic.",
+                    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                    thumbnail: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+                    duration: "42:15",
+                    date: "Oct 12, 2026",
+                    category: "Documentaries",
+                    tags: ["Climate", "Ocean", "Science"]
+                },
+                {
+                    id: 2,
+                    title: "Exclusive Interview: Chief Economist on Global Tech Regulation",
+                    description: "Senior editor Sarah Jenkins sits down with international regulators to discuss artificial intelligence policy frameworks.",
+                    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                    thumbnail: "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=800&q=80",
+                    duration: "18:40",
+                    date: "Oct 10, 2026",
+                    category: "Interviews",
+                    tags: ["Economics", "AI", "Policy"]
+                },
+                {
+                    id: 3,
+                    title: "Cyber Resilience 2026: Securing Critical Infrastructure",
+                    description: "A special news broadcast breaking down modern defense strategies against multi-vector cyber incursions.",
+                    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                    thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
+                    duration: "27:05",
+                    date: "Oct 08, 2026",
+                    category: "Specials",
+                    tags: ["Security", "Tech", "Cyber"]
+                }
+            ],
+            photos: [
+                {
+                    id: 1,
+                    title: "ENB CREW PREPARING FOR A LIVE BROADCAST",
+                    imageUrl: "ENB crew preparing for a live broadcast.jpeg",
+                    thumbnail: "photo-1.jpeg",
+                    photographer: "DIR. PRICELESS",
+                    date: "Oct 13, 2022",
+                    caption: "Mic check, lights on, full focus. ENB is live in 3, 2, 1... 🎙️",
+                    tags: ["CAMERA", "LIGHT", "ACTION"]
+                },
+                {
+                    id: 2,
+                    title: "ENB CREW DURING A LIVE ROUND TABLE SHOW",
+                    imageUrl: "ENB crew during a live round table show.jpeg",
+                    thumbnail: "photo-2.jpeg",
+                    photographer: "REGOBERT",
+                    date: "Oct 11, 2022",
+                    caption: "On-screen conversations, off-screen perfection 🎙️🎬 The ENB crew driving The Round Table: Kenya Today live from the control room! 🔴📺   ",
+                    tags: ["ENB CREW"]
+                },
+                {
+                    id: 3,
+                    title: "ENB founders Director Priceless and Sir Dennis Madeya",
+                    imageUrl: "ENB founders Director Priceless and Sir Dennis Madeya.jpeg",
+                    thumbnail: "photo-3.jpeg",
+                    photographer: "REGOBERT",
+                    date: "Oct 09, 2022",
+                    caption: "From a bold vision to a live broadcast—saluting the founders who built ENB from the ground up! 🎙️✨",
+                    tags: ["ENB FOUNDERS", "VISION", "LEGACY"]
+                }
+                
+            ],
+            articles: [
+                {
+                    id: 1,
+                    title: "Global Energy Summit Reaches Historic Agreement on Renewable Grid Transitions",
+                    author: "Dr. Alistair Finch",
+                    publishDate: "October 14, 2026",
+                    readTime: "6 min read",
+                    category: "Geopolitics",
+                    content: "Delegates from 140 nations ratified a landmark pact today to accelerate clean energy infrastructure funding over the next decade. The agreement mandates strict cross-border sharing of green hydrogen technology and establishes an emergency stabilization fund for vulnerable island nations.\n\nExperts note that while financial commitments are robust, implementation timelines will require unprecedented legislative synchronization across three continents. Eminent News Broadcasting will continue tracking parliamentary votes as they unfold.",
+                    coverImage: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1000&q=80",
+                    tags: ["Energy", "Policy", "Global"]
+                },
+                {
+                    id: 2,
+                    title: "The Quantum Computing Breakthrough: What It Means for Encryption",
+                    author: "Sophia Chen, Chief Technology Correspondent",
+                    publishDate: "October 12, 2026",
+                    readTime: "8 min read",
+                    category: "Technology",
+                    content: "Researchers at the Institute for Advanced Computational Physics announced a stable 1,000-qubit logical processor this week. While hailed as a monumental triumph for molecular modeling and pharmaceutical drug discovery, cybersecurity agencies are scrambling to audit legacy cryptographic protocols.\n\nFinancial institutions have begun migrating core ledgers to post-quantum lattice-based encryption standards well ahead of projected threat windows.",
+                    coverImage: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1000&q=80",
+                    tags: ["Quantum", "Cybersecurity", "Science"]
+                },
+                {
+                    id: 3,
+                    title: "Urban Renaissance: Reclaiming City Centers for Pedestrians",
+                    author: "Marcus Vance",
+                    publishDate: "October 09, 2026",
+                    readTime: "5 min read",
+                    category: "Urban Planning",
+                    content: "Metropolitan centers across Europe and North America are accelerating pedestrianization initiatives at a staggering pace. By restricting combustion vehicles and expanding urban forestry, municipal authorities report a 35% drop in particulate air pollution and a significant surge in local retail vitality.",
+                    coverImage: "https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1000&q=80",
+                    tags: ["Urban", "Sustainability", "Lifestyle"]
+                }
+            ],
+            youtube: [
+                {
+                    id: 1,
+                    title: "EMINENT NEWTWORK BROADCAST: LIVE SPECIAL REPORT",
+                    youtubeEmbedUrl: "https://www.youtube.com/embed/C5WMEUygbMg",
+                    description: "Embuni News Broadcast, bringing you the latest, most urgent, and breaking news",
+                    date: "Oct 13, 2025",
+                    channel: "ENB TV Live"
+                },
+                {
+                    id: 2,
+                    title: "MONDAY KICKOFF",
+                    youtubeEmbedUrl: "https://www.youtube.com/embed/kmZKhFkYDXk?si=igWxYXAUonRo4QHX",
+                    description: "The Monday Kickoff Report is an essential internal brief designed to set the editorial agenda, align production teams, and map out coverage priorities for the upcoming broadcast week.",
+                    date: "Oct 11, 2025",
+                    channel: "ENB TV Live"
+                }
+            ]
+        };
+
+        let currentActiveTab = 'home';
+        let currentHomeFilter = 'all';
+        let currentVideoCat = 'all';
+        let activeSearchQuery = '';
+
+        // --- NAVIGATION & TABS ---
+        function switchTab(tabId) {
+            currentActiveTab = tabId;
+            // Hide all views
+            ['home', 'videos', 'photos', 'articles', 'youtube'].forEach(t => {
+                document.getElementById(`view-${t}`).classList.add('hidden');
+                const navBtn = document.getElementById(`nav-${t}`);
+                if(navBtn) {
+                    navBtn.className = "nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-black hover:text-white hover:bg-gray-800";
+                }
+            });
+
+            // Show selected view
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if(activeBtn) {
+                activeBtn.className = "nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all text-black bg-brand-600 shadow-md";
+            }
+
+            // Clear search view if tab switched manually
+            if(activeSearchQuery) {
+                document.getElementById('search-results-container').classList.add('hidden');
+                activeSearchQuery = '';
+                document.getElementById('global-search').value = '';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderCurrentView();
+        }
+
+        function renderCurrentView() {
+            if(currentActiveTab === 'home') renderHomeFeed();
+            if(currentActiveTab === 'videos') renderVideos();
+            if(currentActiveTab === 'photos') renderPhotos();
+            if(currentActiveTab === 'articles') renderArticles();
+            if(currentActiveTab === 'youtube') renderYoutube();
+        }
+
+        // --- RENDER HOME FEED ---
+        function filterHomeFeed(filter) {
+            currentHomeFilter = filter;
+            ['all', 'videos', 'photos', 'articles', 'youtube'].forEach(f => {
+                const btn = document.getElementById(`filter-home-${f}`);
+                if(f === filter) {
+                    btn.className = "home-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 text-black transition-all shadow-md";
+                } else {
+                    btn.className = "home-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-cardbase text-black hover:text-white border border-borderbase transition-all";
+                }
+            });
+            renderHomeFeed();
+        }
+
+        function renderHomeFeed() {
+            const container = document.getElementById('home-feed-grid');
+            let items = [];
+
+            if(currentHomeFilter === 'all' || currentHomeFilter === 'videos') {
+                appData.videos.forEach(v => items.push({type: 'video', data: v, dateObj: new Date(v.date)}));
+            }
+            if(currentHomeFilter === 'all' || currentHomeFilter === 'photos') {
+                appData.photos.forEach(p => items.push({type: 'photo', data: p, dateObj: new Date(p.date)}));
+            }
+            if(currentHomeFilter === 'all' || currentHomeFilter === 'articles') {
+                appData.articles.forEach(a => items.push({type: 'article', data: a, dateObj: new Date(a.publishDate)}));
+            }
+            if(currentHomeFilter === 'all' || currentHomeFilter === 'youtube') {
+                appData.youtube.forEach(y => items.push({type: 'youtube', data: y, dateObj: new Date(y.date)}));
+            }
+
+            if(items.length === 0) {
+                container.innerHTML = `<div class="col-span-3 text-center py-16 text-gray-500">No content found for this filter.</div>`;
+                return;
+            }
+
+            container.innerHTML = items.map(item => {
+                if(item.type === 'video') {
+                    return `
+                        <div class="bg-cardbase border border-borderbase rounded-2xl overflow-hidden shadow-lg hover:border-brand-500/50 transition-all group flex flex-col justify-between">
+                            <div>
+                                <div class="relative aspect-video overflow-hidden bg-darkbase cursor-pointer" onclick="openDetailModal('video', ${item.data.id})">
+                                    <img src="${item.data.thumbnail}" alt="${item.data.title}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                                        <div class="w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-xl">
+                                            <i class="fa-solid fa-play ml-0.5"></i>
+                                        </div>
+                                    </div>
+                                    <span class="absolute bottom-3 right-3 bg-black/80 text-white text-[10px] font-bold px-2 py-0.5 rounded">${item.data.duration}</span>
+                                    <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Video Vault</span>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex items-center gap-2 text-[11px] text-gray-400 mb-2">
+                                        <span>${item.data.date}</span>
+                                        <span>•</span>
+                                        <span class="text-brand-400 font-semibold">${item.data.category}</span>
+                                    </div>
+                                    <h4 onclick="openDetailModal('video', ${item.data.id})" class="font-bold text-white text-base hover:text-brand-400 cursor-pointer line-clamp-2 mb-2">${item.data.title}</h4>
+                                    <p class="text-xs text-gray-400 line-clamp-2">${item.data.description}</p>
+                                </div>
+                            </div>
+                            <div class="p-5 pt-0 flex items-center justify-between border-t border-borderbase/50 mt-4 pt-3">
+                                <div class="flex gap-1">
+                                    ${item.data.tags.map(t => `<span class="bg-darkbase text-gray-400 text-[10px] px-2 py-0.5 rounded border border-borderbase">#${t}</span>`).join('')}
+                                </div>
+                                <button onclick="openDetailModal('video', ${item.data.id})" class="text-brand-400 hover:text-brand-300 text-xs font-semibold flex items-center gap-1">Watch <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                            </div>
+                        </div>
+                    `;
+                } else if(item.type === 'photo') {
+                    return `
+                        <div class="bg-cardbase border border-borderbase rounded-2xl overflow-hidden shadow-lg hover:border-brand-500/50 transition-all group flex flex-col justify-between">
+                            <div>
+                                <div class="relative aspect-[4/3] overflow-hidden bg-darkbase cursor-pointer" onclick="openLightbox('${item.data.imageUrl}', '${item.data.title.replace(/'/g, "\\'")}', '${item.data.caption.replace(/'/g, "\\'")}')">
+                                    <img src="ENB crew during a live round table show.jpeg" alt="${item.data.title}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                                        <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-xl">
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                    <span class="absolute top-3 left-3 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Photo Essay</span>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex items-center gap-2 text-[11px] text-gray-400 mb-2">
+                                        <span>${item.data.date}</span>
+                                        <span>•</span>
+                                        <span class="text-purple-400 font-semibold">${item.data.photographer}</span>
+                                    </div>
+                                    <h4 onclick="openLightbox('${item.data.imageUrl}', '${item.data.title.replace(/'/g, "\\'")}', '${item.data.caption.replace(/'/g, "\\'")}')" class="font-bold text-white text-base hover:text-purple-400 cursor-pointer line-clamp-2 mb-2">${item.data.title}</h4>
+                                    <p class="text-xs text-gray-400 line-clamp-2">${item.data.caption}</p>
+                                </div>
+                            </div>
+                            <div class="p-5 pt-0 flex items-center justify-between border-t border-borderbase/50 mt-4 pt-3">
+                                <div class="flex gap-1">
+                                    ${item.data.tags.map(t => `<span class="bg-darkbase text-gray-400 text-[10px] px-2 py-0.5 rounded border border-borderbase">#${t}</span>`).join('')}
+                                </div>
+                                <button onclick="openLightbox('${item.data.imageUrl}', '${item.data.title.replace(/'/g, "\\'")}', '${item.data.caption.replace(/'/g, "\\'")}')" class="text-purple-400 hover:text-purple-300 text-xs font-semibold flex items-center gap-1">Inspect <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                            </div>
+                        </div>
+                    `;
+                } else if(item.type === 'article') {
+                    return `
+                        <div class="bg-cardbase border border-borderbase rounded-2xl overflow-hidden shadow-lg hover:border-brand-500/50 transition-all group flex flex-col justify-between">
+                            <div>
+                                <div class="relative aspect-video overflow-hidden bg-darkbase cursor-pointer" onclick="openDetailModal('article', ${item.data.id})">
+                                    <img src="${item.data.coverImage}" alt="${item.data.title}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                                    <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Editorial</span>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex items-center gap-2 text-[11px] text-gray-400 mb-2">
+                                        <span>${item.data.publishDate}</span>
+                                        <span>•</span>
+                                        <span class="text-blue-400 font-semibold">${item.data.readTime}</span>
+                                    </div>
+                                    <h4 onclick="openDetailModal('article', ${item.data.id})" class="font-bold text-white text-base hover:text-blue-400 cursor-pointer line-clamp-2 mb-2">${item.data.title}</h4>
+                                    <p class="text-xs text-gray-400 line-clamp-2">${item.data.content}</p>
+                                </div>
+                            </div>
+                            <div class="p-5 pt-0 flex items-center justify-between border-t border-borderbase/50 mt-4 pt-3">
+                                <span class="text-xs text-gray-400 font-medium">By ${item.data.author}</span>
+                                <button onclick="openDetailModal('article', ${item.data.id})" class="text-blue-400 hover:text-blue-300 text-xs font-semibold flex items-center gap-1">Read <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                            </div>
+                        </div>
+                    `;
+                } else if(item.type === 'youtube') {
+                    return `
+                       <div class="bg-cardbase border border-borderbase rounded-2xl overflow-hidden shadow-lg hover:border-brand-500/50 transition-all group flex flex-col justify-between">
+                            <div>
+                             <div class="relative aspect-video overflow-hidden bg-darkbase">
+                                <iframe src="https://www.youtube.com/embed/C5WMEUygbMg" class="w-full h-full border-0" allowfullscreen></iframe>
+                                    <span class="absolute top-3 left-3 bg-rose-600 text-black text-[10px] font-bold px-2.5 py-1 rounded-full uppercase flex items-center gap-1 z-10 shadow-md">
+                                <i class="fa-brands fa-youtube"></i> YouTube
+                            </span>
+                            </div>
+                                    <div class="p-5">
+                                    <div class="flex items-center gap-2 text-[11px] text-black mb-2">
+                                    <span>Oct 15, 2026</span>
+                                    <span>•</span>
+                                  <span class="text-black font-semibold">ENB Newsroom</span>
+                                    </div>
+                                  <h4 class="font-bold text-black text-base mb-2">EMBUNI NEWS BROADCAST UPDATE</h4>
+                                       <p class="text-xs text-black line-clamp-2">Latest urgent and breaking news updates from the Eminent News Broadcast desk.</p>
+                                          </div>
+                                  </div>
+                                 <div class="p-5 pt-0 flex items-center justify-between border-t border-borderbase/50 mt-4 pt-3">
+                               <span class="text-xs text-black">Official Broadcast</span>
+                            <a href="https://www.youtube.com/embed/C5WMEUygbMg" target="_blank" rel="noopener noreferrer" class="text-black hover:text-rose-300 text-xs font-semibold flex items-center gap-1">
+                        Open YT <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                             </a> 
+                             </div>
+                         </div>
+                        `;
+                }
+            }).join('');
+        }
+
+        // --- RENDER VIDEOS ---
+        function filterVideoCategory(cat) {
+            currentVideoCat = cat;
+            ['all', 'Documentaries', 'Interviews', 'Specials'].forEach(c => {
+                const btn = document.getElementById(`vcat-${c}`);
+                if(btn) {
+                    if(c === cat) {
+                        btn.className = "vcat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white";
+                    } else {
+                        btn.className = "vcat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-cardbase text-gray-300 border border-borderbase";
+                    }
+                }
+            });
+            renderVideos();
+        }
+
+        function renderVideos() {
+            const container = document.getElementById('videos-grid');
+            let filtered = appData.videos;
+            if(currentVideoCat !== 'all') {
+                filtered = appData.videos.filter(v => v.category === currentVideoCat);
+            }
+
+            container.innerHTML = filtered.map(v => `
+                <div class="bg-cardbase border border-borderbase rounded-2xl overflow-hidden shadow-lg hover:border-brand-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-video overflow-hidden bg-darkbase cursor-pointer" onclick="openDetailModal('video', ${v.id})">
+                            <img src="${v.thumbnail}" alt="${v.title}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                            <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                                <div class="w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-xl">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                            </div>
+                            <span class="absolute bottom-3 right-3 bg-black/80 text-white text-[10px] font-bold px-2 py-0.5 rounded">${v.duration}</span>
+                            <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">${v.category}</span>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 text-[11px] text-gray-400 mb-2">
+                                <span>${v.date}</span>
+                            </div>
+                            <h4 onclick="openDetailModal('video', ${v.id})" class="font-bold text-white text-base hover:text-brand-400 cursor-pointer line-clamp-2 mb-2">${v.title}</h4>
+                            <p class="text-xs text-gray-400 line-clamp-2">${v.description}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-borderbase/50 mt-4 pt-3">
+                        <div class="flex gap-1">
+                            ${v.tags.map(t => `<span class="bg-darkbase text-gray-400 text-[10px] px-2 py-0.5 rounded border border-borderbase">#${t}</span>`).join('')}
+                        </div>
+                        <button onclick="openDetailModal('video', ${v.id})" class="text-brand-400 hover:text-brand-300 text-xs font-semibold flex items-center gap-1">Play Vault <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- RENDER PHOTOS ---
+        function renderPhotos() {
+            const container = document.getElementById('photos-masonry');
+            container.innerHTML = appData.photos.map(p => `
+                <div class="masonry-item bg-cardbase border border-borderbase rounded-2xl overflow-hidden shadow-lg hover:border-purple-500/50 transition-all group">
+                    <div class="relative overflow-hidden bg-darkbase cursor-pointer" onclick="openLightbox('${p.imageUrl}', '${p.title.replace(/'/g, "\\'")}', '${p.caption.replace(/'/g, "\\'")}')">
+                        <img src="${p.imageUrl}" alt="${p.title}" class="w-full object-cover group-hover:scale-105 transition-all duration-500">
+                        <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-xl">
+                                <i class="fa-solid fa-expand"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between text-[11px] text-gray-400 mb-2">
+                            <span class="text-purple-400 font-semibold">${p.photographer}</span>
+                            <span>${p.date}</span>
+                        </div>
+                        <h4 onclick="openLightbox('${p.imageUrl}', '${p.title.replace(/'/g, "\\'")}', '${p.caption.replace(/'/g, "\\'")}')" class="font-bold text-white text-base hover:text-purple-400 cursor-pointer mb-2">${p.title}</h4>
+                        <p class="text-xs text-gray-400 mb-4">${p.caption}</p>
+                        <div class="flex items-center justify-between pt-3 border-t border-borderbase/50">
+                            <div class="flex gap-1">
+                                ${p.tags.map(t => `<span class="bg-darkbase text-gray-400 text-[10px] px-2 py-0.5 rounded border border-borderbase">#${t}</span>`).join('')}
+                            </div>
+                            <button onclick="openLightbox('${p.imageUrl}', '${p.title.replace(/'/g, "\\'")}', '${p.caption.replace(/'/g, "\\'")}')" class="text-purple-400 text-xs font-semibold hover:underline">Inspect HD</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- RENDER ARTICLES ---
+        function renderArticles() {
+            const container = document.getElementById('articles-grid');
+            container.innerHTML = appData.articles.map(a => `
+                <div class="bg-cardbase border border-borderbase rounded-2xl overflow-hidden shadow-lg hover:border-blue-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-video overflow-hidden bg-darkbase cursor-pointer" onclick="openDetailModal('article', ${a.id})">
+                            <img src="${a.coverImage}" alt="${a.title}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                            <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">${a.category}</span>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 text-[11px] text-gray-400 mb-2">
+                                <span>${a.publishDate}</span>
+                                <span>•</span>
+                                <span class="text-blue-400 font-semibold">${a.readTime}</span>
+                            </div>
+                            <h4 onclick="openDetailModal('article', ${a.id})" class="font-bold text-white text-base hover:text-blue-400 cursor-pointer line-clamp-2 mb-2">${a.title}</h4>
+                            <p class="text-xs text-gray-400 line-clamp-2">${a.content}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-borderbase/50 mt-4 pt-3">
+                        <span class="text-xs text-gray-400 font-medium">By ${a.author}</span>
+                        <button onclick="openDetailModal('article', ${a.id})" class="text-blue-400 hover:text-blue-300 text-xs font-semibold flex items-center gap-1">Full Article <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- RENDER YOUTUBE ---
+        function renderYoutube() {
+            const container = document.getElementById('youtube-grid');
+            container.innerHTML = appData.youtube.map(y => `
+                <div class="bg-cardbase border border-borderbase rounded-2xl overflow-hidden shadow-lg hover:border-rose-500/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-video overflow-hidden bg-darkbase">
+                            <iframe src="https://www.youtube.com/embed/C5WMEUygbMg" class="w-full h-full border-0" allowfullscreen></iframe>
+                            <span class="absolute top-3 left-3 bg-rose-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase flex items-center gap-1 z-10 shadow-md"><i class="fa-brands fa-youtube"></i> YouTube</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-[11px] text-gray-400 mb-2">
+                                <span>${y.date}</span>
+                                <span>•</span>
+                                <span class="text-rose-400 font-semibold">${y.channel}</span>
+                            </div>
+                            <h3 class="font-bold text-white text-lg mb-2">${y.title}</h3>
+                            <p class="text-sm text-gray-400 leading-relaxed">${y.description}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-borderbase/50 mt-4 pt-4">
+                        <span class="text-xs text-rose-500 font-bold flex items-center gap-1.5"><i class="fa-brands fa-youtube"></i> Official Stream</span>
+                        <a href="https://www.youtube.com/embed/C5WMEUygbMg" target="_blank" rel="noopener noreferrer" class="bg-gray-800 hover:bg-gray-700 text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+                            Open in YouTube <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- UNIVERSAL DETAIL MODAL ---
+        function openDetailModal(type, id) {
+            const modal = document.getElementById('detail-modal');
+            const contentDiv = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            if(type === 'video') {
+                const v = appData.videos.find(item => item.id === id);
+                if(!v) return;
+                contentDiv.innerHTML = `
+                    <span class="bg-brand-600 text-black text-xs font-bold px-3 py-1 rounded-full uppercase">${v.category}</span>
+                    <h2 class="text-2xl font-black text-black mt-3 mb-4">${v.title}</h2>
+                    <div class="aspect-video bg-darkbase rounded-2xl overflow-hidden mb-6 border border-borderbase relative">
+                        <video src="${v.videoUrl}" controls autoplay class="w-full h-full object-cover"></video>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-black mb-4 pb-4 border-b border-borderbase">
+                        <span>Published: ${v.date}</span>
+                        <span>Duration: ${v.duration}</span>
+                    </div>
+                    <p class="text-sm text-black leading-relaxed mb-6">${v.description}</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex gap-2">
+                            ${v.tags.map(t => `<span class="bg-darkbase text-black text-xs px-2.5 py-1 rounded-lg border border-borderbase">#${t}</span>`).join('')}
+                        </div>
+                        <button onclick="shareCurrentItem()" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-share-nodes"></i> Share Video
+                        </button>
+                    </div>
+                `;
+            } else if(type === 'article') {
+                const a = appData.articles.find(item => item.id === id);
+                if(!a) return;
+                contentDiv.innerHTML = `
+                    <span class="bg-blue-600 text-black text-xs font-bold px-3 py-1 rounded-full uppercase">${a.category}</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-black mt-3 mb-4 leading-tight">${a.title}</h2>
+                    <div class="flex items-center gap-3 text-xs text-black mb-6 pb-4 border-b border-borderbase">
+                        <div class="w-8 h-8 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold">
+                            ${a.author.charAt(0)}
+                        </div>
+                        <div>
+                            <p class="text-black font-semibold">${a.author}</p>
+                            <p>${a.publishDate} • ${a.readTime}</p>
+                        </div>
+                    </div>
+                    <div class="aspect-[16/9] rounded-2xl overflow-hidden mb-6 border border-borderbase">
+                        <img src="${a.coverImage}" alt="${a.title}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-sm text-black leading-relaxed space-y-4 mb-8 whitespace-pre-line">
+                        ${a.content}
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-borderbase">
+                        <div class="flex gap-2">
+                            ${a.tags.map(t => `<span class="bg-darkbase text-black text-xs px-2.5 py-1 rounded-lg border border-borderbase">#${t}</span>`).join('')}
+                        </div>
+                        <button onclick="shareCurrentItem()" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-share-nodes"></i> Share Article
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function closeDetailModal() {
+            const modal = document.getElementById('detail-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.getElementById('modal-content').innerHTML = '';
+        }
+
+        // --- LIGHTBOX PHOTO MODAL ---
+        function openLightbox(imgUrl, title, caption) {
+            const modal = document.getElementById('lightbox-modal');
+            document.getElementById('lightbox-img').src = imgUrl;
+            document.getElementById('lightbox-title').innerText = title;
+            document.getElementById('lightbox-caption').innerText = caption;
+            document.getElementById('lightbox-download').href = imgUrl;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // --- SEARCH FUNCTIONALITY ---
+        function handleSearch(query) {
+            activeSearchQuery = query.trim().toLowerCase();
+            const container = document.getElementById('search-results-container');
+            const grid = document.getElementById('search-results-grid');
+            const queryText = document.getElementById('search-query-text');
+
+            if(!activeSearchQuery) {
+                container.classList.add('hidden');
+                return;
+            }
+
+            container.classList.remove('hidden');
+            queryText.innerText = activeSearchQuery;
+
+            let matches = [];
+            appData.videos.forEach(v => {
+                if(v.title.toLowerCase().includes(activeSearchQuery) || v.description.toLowerCase().includes(activeSearchQuery) || v.category.toLowerCase().includes(activeSearchQuery)) {
+                    matches.push({type: 'Video', title: v.title, sub: v.category, thumb: v.thumbnail, date: v.date, id: v.id, contentType: 'video'});
+                }
+            });
+            appData.photos.forEach(p => {
+                if(p.title.toLowerCase().includes(activeSearchQuery) || p.caption.toLowerCase().includes(activeSearchQuery) || p.photographer.toLowerCase().includes(activeSearchQuery)) {
+                    matches.push({type: 'Photo', title: p.title, sub: p.photographer, thumb: p.imageUrl, date: p.date, id: p.id, contentType: 'photo'});
+                }
+            });
+            appData.articles.forEach(a => {
+                if(a.title.toLowerCase().includes(activeSearchQuery) || a.content.toLowerCase().includes(activeSearchQuery) || a.author.toLowerCase().includes(activeSearchQuery)) {
+                    matches.push({type: 'Article', title: a.title, sub: a.author, thumb: a.coverImage, date: a.publishDate, id: a.id, contentType: 'article'});
+                }
+            });
+            appData.youtube.forEach(y => {
+                if(y.title.toLowerCase().includes(activeSearchQuery) || y.description.toLowerCase().includes(activeSearchQuery)) {
+                    matches.push({type: 'YouTube', title: y.title, sub: y.channel, thumb: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80', date: y.date, id: y.id, contentType: 'youtube'});
+                }
+            });
+
+            if(matches.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 text-center py-12 text-gray-500">No matching broadcasts or content found for "${activeSearchQuery}".</div>`;
+                return;
+            }
+
+            grid.innerHTML = matches.map(m => `
+                <div class="bg-cardbase border border-borderbase rounded-2xl overflow-hidden shadow-lg p-4 flex gap-4 items-center">
+                    <img src="${m.thumb}" alt="${m.title}" class="w-20 h-20 rounded-xl object-cover flex-shrink-0">
+                    <div class="flex-grow min-w-0">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded uppercase ${m.type === 'Video' ? 'bg-brand-600 text-white' : m.type === 'Photo' ? 'bg-purple-600 text-white' : m.type === 'Article' ? 'bg-blue-600 text-white' : 'bg-rose-600 text-white'}">${m.type}</span>
+                        <h4 class="font-bold text-white text-sm truncate mt-1">${m.title}</h4>
+                        <p class="text-xs text-gray-400 mt-0.5">${m.sub} • ${m.date}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function clearSearch() {
+            document.getElementById('global-search').value = '';
+            document.getElementById('search-results-container').classList.add('hidden');
+            activeSearchQuery = '';
+        }
+
+        // --- ADD CONTENT MODAL ---
+        function openAddModal() {
+            document.getElementById('add-modal').classList.remove('hidden');
+            document.getElementById('add-modal').classList.add('flex');
+            toggleAddFields();
+        }
+
+        function closeAddModal() {
+            document.getElementById('add-modal').classList.add('hidden');
+            document.getElementById('add-modal').classList.remove('flex');
+            document.getElementById('add-content-form').reset();
+        }
+
+        function toggleAddFields() {
+            const type = document.getElementById('new-type').value;
+            const urlLabel = document.getElementById('url-label');
+            const extraLabel = document.getElementById('extra-label');
+
+            if(type === 'video') {
+                urlLabel.innerText = "Thumbnail Image URL";
+                extraLabel.innerText = "Category (e.g., Documentaries, Interviews)";
+            } else if(type === 'photo') {
+                urlLabel.innerText = "High-Res Image URL";
+                extraLabel.innerText = "Photographer Name";
+            } else if(type === 'article') {
+                urlLabel.innerText = "Cover Image URL";
+                extraLabel.innerText = "Author Name";
+            } else if(type === 'youtube') {
+                urlLabel.innerText = "YouTube Embed URL (https://www.youtube.com/embed/...)";
+                extraLabel.innerText = "Channel Name";
+            }
+        }
+
+        function handleAddNewContent(event) {
+            event.preventDefault();
+            const type = document.getElementById('new-type').value;
+            const title = document.getElementById('new-title').value;
+            const url = document.getElementById('new-url').value;
+            const extra = document.getElementById('new-extra').value;
+            const desc = document.getElementById('new-desc').value;
+
+            const today = "Oct 14, 2026";
+
+            if(type === 'video') {
+                appData.videos.unshift({
+                    id: Date.now(),
+                    title: title,
+                    description: desc,
+                    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    thumbnail: url,
+                    duration: "15:20",
+                    date: today,
+                    category: extra,
+                    tags: ["New", "Broadcast"]
+                });
+            } else if(type === 'photo') {
+                appData.photos.unshift({
+                    id: Date.now(),
+                    title: title,
+                    imageUrl: url,
+                    photographer: extra,
+                    date: today,
+                    caption: desc,
+                    tags: ["Visual", "Exclusive"]
+                });
+            } else if(type === 'article') {
+                appData.articles.unshift({
+                    id: Date.now(),
+                    title: title,
+                    author: extra,
+                    publishDate: today,
+                    readTime: "5 min read",
+                    category: "Global News",
+                    content: desc,
+                    coverImage: url,
+                    tags: ["Editorial", "News"]
+                });
+            } else if(type === 'youtube') {
+                appData.youtube.unshift({
+                    id: Date.now(),
+                    title: title,
+                    youtubeEmbedUrl: url,
+                    description: desc,
+                    date: today,
+                    channel: extra
+                });
+            }
+
+            closeAddModal();
+            showToast("Successfully Published", `Your new ${type} has been added to the Eminent Network.`);
+            renderCurrentView();
+        }
+
+        // --- TOAST NOTIFICATION ---
+        function showToast(title, msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        function shareCurrentItem() {
+            showToast("Link Copied", "Secure broadcast link copied to clipboard.");
+        }
+
+        // --- MOBILE MENU ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            if(menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = "fa-solid fa-xmark text-lg";
+            } else {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars text-lg";
+            }
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            renderCurrentView();
+        }
+    </script>
+</body>
+</html>
